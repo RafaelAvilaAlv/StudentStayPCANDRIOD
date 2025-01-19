@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F3EBE4">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="292dp"
+            android:layout_height="71dp"
+            app:srcCompat="@drawable/img_20240115_wa0001_removebg_preview" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="16dp" />
+
+        <LinearLayout
+            android:layout_width="375dp"
+            android:layout_height="43dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView9"
+                android:layout_width="267dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="Seleccione su Habitacion"
+                android:textColor="#131313"
+                android:textSize="20sp" />
+
+            <Spinner
+                android:id="@+id/spinner1"
+                android:layout_width="109dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/spinner_border"
+                android:gravity="center"
+                tools:ignore="TouchTargetSizeCheck" />
+
+
+        </LinearLayout>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="27dp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewhabi"
+            android:layout_width="match_parent"
+            android:layout_height="802dp"
+            android:layout_weight="1" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="37dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/perfil"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:backgroundTint="#00FFFFFF"
+                android:onClick="Perfil"
+                android:text="Perfil"
+                android:textColor="#000000"
+                app:icon="@drawable/icons8_user_24"
+                app:iconTint="#000000" />
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <Button
+                android:id="@+id/sesion"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:backgroundTint="#00FFFFFF"
+                android:clickable="false"
+                android:onClick="Sesion"
+                android:text="Cerrar Sesión"
+                android:textColor="#100E0E"
+                app:icon="@drawable/icons8_logout_rounded_25"
+                app:iconTint="#F7000000" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</RelativeLayout>

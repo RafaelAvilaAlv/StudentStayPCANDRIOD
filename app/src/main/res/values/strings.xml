@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">StudentStayPCANDRlOD</string>
+    <string name="app_logo_description">Descripción del logo de la aplicación</string>
+    <string name="email_hint">Email</string>
+    <string name="password_hint">Contraseña</string>
+    <string name="login_button_text">Iniciar Sesión</string>
+    <string name="register_text">Registrarse</string>
+    <string-array name="categorias">
+        <item>Sleccione:</item>
+        <item>Standar</item>
+        <item>Duplex</item>
+        <item>VIP</item>
+    </string-array>
+</resources>
