@@ -12,43 +12,69 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:padding="16dp"
+        android:background="#EFEDED">
 
         <ImageView
             android:id="@+id/imageView5"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="314dp"
             android:layout_marginBottom="20dp"
-            app:srcCompat="@drawable/img_20240115_wa0001_removebg_preview" />
+            app:srcCompat="@drawable/logo" />
 
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp">
+            android:layout_marginBottom="10dp"
+            app:boxBackgroundColor="#FFFFFF"
+            app:boxCornerRadiusTopStart="16dp"
+            app:boxCornerRadiusTopEnd="16dp"
+            app:boxCornerRadiusBottomStart="16dp"
+            app:boxCornerRadiusBottomEnd="16dp"
+            app:boxStrokeColor="#056688"
+            app:hintAnimationEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/emailLogin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Email"
-                android:textSize="16sp" />
-
+                android:textSize="16sp"
+                android:padding="12dp"
+                android:textColor="#333333"
+                android:textColorHint="#888888"
+                android:inputType="textEmailAddress"
+                android:background="@drawable/custom_edit_text_background" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp">
+            android:layout_marginBottom="10dp"
+            app:boxBackgroundColor="#FFFFFF"
+            app:boxCornerRadiusTopStart="16dp"
+            app:boxCornerRadiusTopEnd="16dp"
+            app:boxCornerRadiusBottomStart="16dp"
+            app:boxCornerRadiusBottomEnd="16dp"
+            app:boxStrokeColor="#056688"
+            app:hintAnimationEnabled="true"
+            app:passwordToggleEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/paswordLogin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Contraseña"
-                android:textSize="16sp" />
-
+                android:textSize="16sp"
+                android:inputType="textPassword"
+                android:padding="12dp"
+                android:textColor="#333333"
+                android:textColorHint="#888888"
+                android:background="@drawable/custom_edit_text_background" />
         </com.google.android.material.textfield.TextInputLayout>
+
+
 
         <Button
             android:id="@+id/buttonLogin"
@@ -56,17 +82,19 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="15dp"
             android:backgroundTint="#056688"
+            android:padding="12dp"
             android:text="Iniciar Sesión"
+            android:textColor="#FFFFFF"
             android:textSize="18sp"
-            app:cornerRadius="4dp" />
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/textViewLo"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Registrarse"
-            android:textAlignment="center"
+            android:text="¿No tienes cuenta? Registrarse"
+            android:textColor="#056688"
             android:textSize="16sp" />
 
     </LinearLayout>

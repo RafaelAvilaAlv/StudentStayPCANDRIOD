@@ -13,6 +13,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "zHOtel"
+rootProject.name = "StudentStayPCAndroid"
 include(":app")
  
