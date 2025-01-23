@@ -20,7 +20,7 @@
             android:layout_width="172dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            app:srcCompat="@drawable/img_20240115_wa0001_removebg_preview" />
+            app:srcCompat="@drawable/logo" />
 
     </LinearLayout>
 
