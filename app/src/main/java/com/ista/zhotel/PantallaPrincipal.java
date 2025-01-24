@@ -18,8 +18,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.ista.zhotel.model.Habi;
 import com.ista.zhotel.model.MyAdapterHabi;
 
@@ -71,7 +69,6 @@ public class PantallaPrincipal extends AppCompatActivity {
         inicio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FirebaseAuth.getInstance().signOut();
                 Intent intent= new Intent(getApplicationContext(), Login.class);
                 startActivity(intent);
                 finish();
@@ -94,8 +91,8 @@ public class PantallaPrincipal extends AppCompatActivity {
 
     private void getDatos(){
         habitacion.clear();
-        //String url="http://localhost:8081/api/habitaciones";//endpoint.
-        String url="http://192.168.18.5:8081/api/habitaciones";//endpoint.
+        String url="http://192.168.0.106:8081/api/habitaciones";//endpoint.
+        // url="http://192.168.18.5:8081/api/habitaciones";//endpoint.
         JsonArrayRequest jsonArrayRequest= new JsonArrayRequest(url, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
@@ -158,6 +155,5 @@ public class PantallaPrincipal extends AppCompatActivity {
     @Override
     public void onDestroy(){
         super.onDestroy();
-        FirebaseAuth.getInstance().signOut();
     }
 }

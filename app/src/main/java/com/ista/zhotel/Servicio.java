@@ -29,7 +29,6 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
-import com.google.firebase.auth.FirebaseAuth;
 import com.ista.zhotel.model.Habi;
 import com.ista.zhotel.model.MyAdapter;
 import com.ista.zhotel.model.Servi;
@@ -135,7 +134,8 @@ public class Servicio extends AppCompatActivity {
     }
     private void getDatos(){
         servis.clear();
-        String url="http://192.168.18.5:8081/api/tiposervicio";//
+        String url="http://192.168.0.106:8081/api/tiposervicio";//
+        //String url="http://192.168.18.5:8081/api/tiposervicio";//
         JsonArrayRequest jsonArrayRequest= new JsonArrayRequest(url, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
@@ -178,8 +178,8 @@ public class Servicio extends AppCompatActivity {
     }
 
     private void guardarDatos(String descripcion, Long idHabitaciones, Long idTipo_servicio, String estado) {
-        //String url = "http://localhost:8081/api/servicio";
-        String url = "http://192.168.18.5:8081/api/servicio";
+        String url = "http://192.168.0.106:8081/api/servicio";
+        //String url = "http://192.168.18.5:8081/api/servicio";
         JSONObject jsonBody = new JSONObject();
         try {
             jsonBody.put("descripcion", descripcion);
@@ -209,7 +209,6 @@ public class Servicio extends AppCompatActivity {
     }
 
     public void Sesion(View v) {
-        FirebaseAuth.getInstance().signOut();
         Intent intent= new Intent(getApplicationContext(), Login.class);
         startActivity(intent);
         finish();
