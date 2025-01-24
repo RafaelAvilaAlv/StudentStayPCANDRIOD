@@ -102,7 +102,7 @@ public class Login extends AppCompatActivity {
     }
     public void getDatos(String usuario, String contrasena){
         //String url="http://localhost:8081/api/clientes/usuario/"+usuario;//endpoint.
-        String url = "http://192.168.18.230:8081/api/clientes/usuario/" + usuario;
+        String url = "http://192.168.18.5:8081/api/clientes/usuario/" + usuario;
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url,null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {

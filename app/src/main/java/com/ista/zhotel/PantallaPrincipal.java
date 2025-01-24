@@ -94,8 +94,8 @@ public class PantallaPrincipal extends AppCompatActivity {
 
     private void getDatos(){
         habitacion.clear();
-        String url="http://localhost:8081/api/habitaciones";//endpoint.
-        //String url="http://192.168.18.230:8081/api/habitaciones";//endpoint.
+        //String url="http://localhost:8081/api/habitaciones";//endpoint.
+        String url="http://192.168.18.5:8081/api/habitaciones";//endpoint.
         JsonArrayRequest jsonArrayRequest= new JsonArrayRequest(url, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
