@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F3EBE4">
+    android:background="#FFFDF9">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,7 +15,7 @@
             android:id="@+id/imageView4"
             android:layout_width="271dp"
             android:layout_height="62dp"
-            app:srcCompat="@drawable/img_20240115_wa0001_removebg_preview" />
+            app:srcCompat="@drawable/logoh" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewhabi"
