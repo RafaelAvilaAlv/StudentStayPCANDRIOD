@@ -42,13 +42,14 @@ public class MainActivity extends AppCompatActivity {
         scaleY.setInterpolator(new BounceInterpolator());
         scaleX.start();
         scaleY.start();
-
     }
-    public void Registro(View view){
+
+    public void Registro(View view) {
         Intent registro = new Intent(this, Registrar.class);
         startActivity(registro);
     }
-    public void Iniciar(View view){
+
+    public void Iniciar(View view) {
         Intent registro1 = new Intent(this, Login.class);
         startActivity(registro1);
     }

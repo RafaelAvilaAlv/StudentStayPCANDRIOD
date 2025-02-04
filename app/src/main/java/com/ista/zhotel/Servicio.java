@@ -4,6 +4,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -22,6 +23,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -32,9 +34,11 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.ista.zhotel.model.Habi;
 import com.ista.zhotel.model.MyAdapter;
 import com.ista.zhotel.model.Servi;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,6 +46,7 @@ public class Servicio extends AppCompatActivity {
     RecyclerView recyclerView;
     MyAdapter adapter;
     ArrayList<Servi> servis = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
@@ -132,11 +137,12 @@ public class Servicio extends AppCompatActivity {
             }
         });
     }
-    private void getDatos(){
+
+    private void getDatos() {
         servis.clear();
-        String url="http://192.168.0.106:8081/api/tiposervicio";//
+        String url = Environment.BASE_URL + "/tiposervicio";//
         //String url="http://192.168.18.5:8081/api/tiposervicio";//
-        JsonArrayRequest jsonArrayRequest= new JsonArrayRequest(url, new Response.Listener<JSONArray>() {
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(url, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
                 pasarJson(response);
@@ -144,19 +150,20 @@ public class Servicio extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(), "Tu mensaje aquí", Toast.LENGTH_SHORT).show();Toast.makeText(Servicio.this, "Error al obtener datos", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Tu mensaje aquí", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Servicio.this, "Error al obtener datos", Toast.LENGTH_SHORT).show();
             }
         }
         );
         Volley.newRequestQueue(this).add(jsonArrayRequest);
     }
 
-    private void pasarJson( JSONArray array){
-        for(int i=0;i<array.length();i++){
-            JSONObject json=null;
-            Servi cliente= new Servi();
+    private void pasarJson(JSONArray array) {
+        for (int i = 0; i < array.length(); i++) {
+            JSONObject json = null;
+            Servi cliente = new Servi();
             try {
-                json=array.getJSONObject(i);
+                json = array.getJSONObject(i);
                 cliente.setIdTipo_servicio(json.getInt("idTipo_servicio"));
                 cliente.setTitulo(json.getString("titulo"));
                 cliente.setDescripcion(json.getString("descripciontipo"));
@@ -178,7 +185,7 @@ public class Servicio extends AppCompatActivity {
     }
 
     private void guardarDatos(String descripcion, Long idHabitaciones, Long idTipo_servicio, String estado) {
-        String url = "http://192.168.0.106:8081/api/servicio";
+        String url = Environment.BASE_URL + "/servicio";
         //String url = "http://192.168.18.5:8081/api/servicio";
         JSONObject jsonBody = new JSONObject();
         try {
@@ -203,13 +210,13 @@ public class Servicio extends AppCompatActivity {
         Volley.newRequestQueue(this).add(jsonObjectRequest);
     }
 
-    public void Perfil(View view){
+    public void Perfil(View view) {
         Intent perfil = new Intent(this, PantallaPerfilUsuario.class);
         startActivity(perfil);
     }
 
     public void Sesion(View v) {
-        Intent intent= new Intent(getApplicationContext(), Login.class);
+        Intent intent = new Intent(getApplicationContext(), Login.class);
         startActivity(intent);
         finish();
     }

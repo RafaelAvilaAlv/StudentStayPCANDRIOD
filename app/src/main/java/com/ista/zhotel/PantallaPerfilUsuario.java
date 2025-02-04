@@ -59,7 +59,7 @@ public class PantallaPerfilUsuario extends AppCompatActivity {
     }
 
     public void getDatos(String usuario) {
-        String url = "http://192.168.0.106:8081/api/clientes/usuario/" + usuario;
+        String url = Environment.BASE_URL + "/clientes/usuario/" + usuario;
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
@@ -88,7 +88,7 @@ public class PantallaPerfilUsuario extends AppCompatActivity {
     }
 
     public void getDatosByCedula(String cedula) {
-        String url = "http://192.168.0.106:8081/api/personas/" + cedula;
+        String url = Environment.BASE_URL + "/personas/" + cedula;
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -123,7 +123,7 @@ public class PantallaPerfilUsuario extends AppCompatActivity {
     }
 
     public void updateDatosUsuario(String contrasena, String usuario, Long id) {
-        String url = "http://192.168.0.106:8081/api/clientes/" + id;
+        String url = Environment.BASE_URL + "/clientes/" + id;
         JSONObject requestBodyUsuario = new JSONObject();
         try {
             requestBodyUsuario.put("contrasena", contrasena);
@@ -147,7 +147,7 @@ public class PantallaPerfilUsuario extends AppCompatActivity {
     }
 
     public void updateDatosPersona(String nom1, String nom2, String ape1, String ape2, String tel, int edad, String cedula) {
-        String url = "http://192.168.0.106:8081/api/personas/" + cedula;
+        String url = Environment.BASE_URL + "/personas/" + cedula;
         JSONObject requestBodyPersona = new JSONObject();
         try {
             requestBodyPersona.put("nombre", nom1);

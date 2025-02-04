@@ -76,16 +76,16 @@ public class PantallaReservar extends AppCompatActivity {
     private int numPiso;
     private int numHabi;
     private Long idPago;
-    public  Long cedula;
-    public  Long idReserva;
-    public  Long idEncabezado;
+    public Long cedula;
+    public Long idReserva;
+    public Long idEncabezado;
     private TextView txtTotal;
     private TextView txtDias, txtprecio;
     public static double precio;
     public static int idHabicionRe;
     public static String correoUsuRe;
     public static Bitmap decodedByte1;
-     private AutoCompleteTextView spnPersonas;
+    private AutoCompleteTextView spnPersonas;
     ImageView adaptarImagen;
 
     @Override
@@ -129,11 +129,11 @@ public class PantallaReservar extends AppCompatActivity {
         });
 
         spnPersonas = findViewById(R.id.nroPersonas);
-        adaptarImagen= findViewById(R.id.imagenBase);
+        adaptarImagen = findViewById(R.id.imagenBase);
         adaptarImagen.setScaleType(ImageView.ScaleType.FIT_XY);
         adaptarImagen.setImageBitmap(decodedByte1);
-        Integer[] datos={1,2,3,4};
-        ArrayAdapter<Integer> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,datos);
+        Integer[] datos = {1, 2, 3, 4};
+        ArrayAdapter<Integer> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, datos);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spnPersonas.setAdapter(adapter);
         calendar();
@@ -144,11 +144,11 @@ public class PantallaReservar extends AppCompatActivity {
         asignarPago();
     }
 
-    public void calendar(){
+    public void calendar() {
         txtFechaIn = findViewById(R.id.fechaInic);
         txtFechaFin = findViewById(R.id.fechafin);
         txtDias = findViewById(R.id.txtDias);
-        txtprecio= findViewById(R.id.precioHabi);
+        txtprecio = findViewById(R.id.precioHabi);
         txtFechaIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -197,7 +197,7 @@ public class PantallaReservar extends AppCompatActivity {
         });
         datePicker.show(getSupportFragmentManager(), "DATE_PICKER_TAG");
     }
-    
+
 
     private void showDatePickerFin() {
         CalendarConstraints.Builder constraintsBuilder = new CalendarConstraints.Builder();
@@ -234,15 +234,15 @@ public class PantallaReservar extends AppCompatActivity {
         datePicker.show(getSupportFragmentManager(), "DATE_PICKER_TAG");
     }
 
-    public String calcularDias(){
+    public String calcularDias() {
         DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        LocalDate fechaIn = LocalDate.parse(selectedDateIn,format);
-        LocalDate fechaFin = LocalDate.parse(selectedDateFin,format);
+        LocalDate fechaIn = LocalDate.parse(selectedDateIn, format);
+        LocalDate fechaFin = LocalDate.parse(selectedDateFin, format);
         int total = (int) fechaIn.until(fechaFin).getDays();
         return String.valueOf(total);
     }
 
-    public void totalPrecio(){
+    public void totalPrecio() {
         String inputText = txtDias.getText().toString().trim();
         txtTotal = findViewById(R.id.txtTotal);
         if (!inputText.isEmpty()) {
@@ -258,17 +258,17 @@ public class PantallaReservar extends AppCompatActivity {
             txtTotal.setText("0");
         }
     }
-    public void getDatos(String usuario){
-        String url="http://192.168.0.106:8081/api/clientes/usuario/"+usuario;//endpoint.
-        //String url="http://192.168.18.5:8081/api/clientes/usuario/"+usuario;//endpoint.
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url,null, new Response.Listener<JSONArray>() {
+
+    public void getDatos(String usuario) {
+        String url = Environment.BASE_URL + "/clientes/usuario/" + usuario;//endpoint.
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
                 try {
-                    if(response.length()>0) {
+                    if (response.length() > 0) {
                         JSONObject jsonObjectCliente = response.getJSONObject(0);
                         cedula = jsonObjectCliente.getLong("idCliente");
-                    }else{
+                    } else {
                         Toast.makeText(getApplicationContext(), "Cliente no encontrado", Toast.LENGTH_LONG).show();
                     }
                 } catch (JSONException j) {
@@ -290,7 +290,7 @@ public class PantallaReservar extends AppCompatActivity {
     }
 
 
-    private <T>void realizarSolicitudPOST(String url,  final T objeto) {
+    private <T> void realizarSolicitudPOST(String url, final T objeto) {
         RequestQueue queue = Volley.newRequestQueue(this);
         Gson gson = new Gson();
         final String personaJson = gson.toJson(objeto);
@@ -315,6 +315,7 @@ public class PantallaReservar extends AppCompatActivity {
             public byte[] getBody() {
                 return personaJson.getBytes();
             }
+
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> headers = new HashMap<>();
@@ -342,13 +343,13 @@ public class PantallaReservar extends AppCompatActivity {
                 String fechaSalidaString = fechaFin.getText().toString();
                 LocalDate fechaSalida = LocalDate.parse(fechaSalidaString, inputFormatter);
                 // Convertir las fechas al formato "yyyy-MM-dd"
-                DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd",Locale.getDefault());
+                DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.getDefault());
                 String fechaEntradaFormatted = fechaEntrada.format(outputFormatter);
                 String fechaSalidaFormatted = fechaSalida.format(outputFormatter);
                 Reservas miReserva = new Reservas();
                 miReserva.setIdHabitaciones((long) idHabicionRe);
                 miReserva.setDias(Integer.valueOf(diasRece.getText().toString()));
-                Log.d("TAG","Fechas;"+fechaEntradaFormatted+fechaSalidaFormatted);
+                Log.d("TAG", "Fechas;" + fechaEntradaFormatted + fechaSalidaFormatted);
                 try {
                     miReserva.setFechaEntrada(fechaEntradaFormatted);
                     miReserva.setFechaSalida(fechaSalidaFormatted);
@@ -389,101 +390,103 @@ public class PantallaReservar extends AppCompatActivity {
         });
     }
 
-public void buscarReser(final EncabezadoCallBack callBack){
-    String url="http://192.168.0.106:8081/api/reservas";//endpoint.
-    //String url="http://192.168.18.230:8081/api/reservas";//endpoint.
-    JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url,null, new Response.Listener<JSONArray>() {
-        @Override
-        public void onResponse(JSONArray response) {
-            try {
-                if(response.length()>0) {
-                    JSONObject jsonObjectCliente = response.getJSONObject(response.length() -1);
-                    idReserva = jsonObjectCliente.getLong("idReserva");
-                    callBack.onReservaObtenido(idReserva);
-                }else{
-                    Toast.makeText(getApplicationContext(), "Cliente no encontrado", Toast.LENGTH_LONG).show();
+    public void buscarReser(final EncabezadoCallBack callBack) {
+        String url = "http://192.168.0.106:8081/api/reservas";//endpoint.
+        //String url="http://192.168.18.230:8081/api/reservas";//endpoint.
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                try {
+                    if (response.length() > 0) {
+                        JSONObject jsonObjectCliente = response.getJSONObject(response.length() - 1);
+                        idReserva = jsonObjectCliente.getLong("idReserva");
+                        callBack.onReservaObtenido(idReserva);
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Cliente no encontrado", Toast.LENGTH_LONG).show();
+                    }
+                } catch (JSONException j) {
+                    j.printStackTrace();
+
                 }
-            } catch (JSONException j) {
-                j.printStackTrace();
-
             }
-        }
-    }, new Response.ErrorListener() {
-        @Override
-        public void onErrorResponse(VolleyError error) {
-            Log.d("He",error.getMessage());
-        }
-    });
-    Volley.newRequestQueue(this).add(jsonArrayRequest);
-
-}
-
-public void buscarEcabezado(final Callback callback){
-    String url="http://192.168.0.106:8081/api/encabezadofactura";//endpoint.
-    //String url="http://192.168.18.230:8081/api/encabezadofactura";//endpoint.
-    JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url,null, new Response.Listener<JSONArray>() {
-        @Override
-        public void onResponse(JSONArray response) {
-            try {
-                if(response.length()>0) {
-                    JSONObject jsonObjectCliente = response.getJSONObject(response.length() -1);
-                    idEncabezado = jsonObjectCliente.getLong("idEncabezado");
-                    callback.onEncabezadoObtenido(idEncabezado);
-                }else{
-                    Toast.makeText(getApplicationContext(), "Cliente no encontrado", Toast.LENGTH_LONG).show();
-                }
-            } catch (JSONException j) {
-                j.printStackTrace();
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("He", error.getMessage());
             }
-
-        }
-    }, new Response.ErrorListener() {
-        @Override
-        public void onErrorResponse(VolleyError error) {
-            Log.d("He",error.getMessage());
-        }
-    });
-    Volley.newRequestQueue(this).add(jsonArrayRequest);
-}
-
-public void crearEncabezad(){
-    buscarReser(new EncabezadoCallBack() {
-        @Override
-        public void onReservaObtenido(long idReserva) {
-            Long rservas = idReserva ;
-            Log.d("He", "id reservar en el crear:  " + rservas);
-            DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd",Locale.getDefault());
-            LocalDate fechaFin1 = LocalDate.now();
-            String fechaFactura = fechaFin1.format(outputFormatter);
-            TextView totalRece = findViewById(R.id.txtTotal);
-            EncabezadoFactura encabezado= new EncabezadoFactura();
-            getDatos(correoUsuRe);
-            encabezado.setIdCliente(cedula);
-            encabezado.setFechaFactura(fechaFactura);
-            encabezado.setIdReserva(rservas);
-            encabezado.setTotal(Double.valueOf(totalRece.getText().toString()));
-            realizarSolicitudPOST("http://192.168.0.106:8081/api/encabezadofactura", encabezado);
-            //realizarSolicitudPOST("http://192.168.18.230:8081/api/encabezadofactura", encabezado);
-        }
-
-        @Override
-        public void onError(String errorMessage) {
-
-        }
-    });
+        });
+        Volley.newRequestQueue(this).add(jsonArrayRequest);
 
     }
-    public void crearDetalle(){
+
+    public void buscarEcabezado(final Callback callback) {
+        String url = "http://192.168.0.106:8081/api/encabezadofactura";//endpoint.
+        //String url="http://192.168.18.230:8081/api/encabezadofactura";//endpoint.
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                try {
+                    if (response.length() > 0) {
+                        JSONObject jsonObjectCliente = response.getJSONObject(response.length() - 1);
+                        idEncabezado = jsonObjectCliente.getLong("idEncabezado");
+                        callback.onEncabezadoObtenido(idEncabezado);
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Cliente no encontrado", Toast.LENGTH_LONG).show();
+                    }
+                } catch (JSONException j) {
+                    j.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("He", error.getMessage());
+            }
+        });
+        Volley.newRequestQueue(this).add(jsonArrayRequest);
+    }
+
+    public void crearEncabezad() {
+        buscarReser(new EncabezadoCallBack() {
+            @Override
+            public void onReservaObtenido(long idReserva) {
+                Long rservas = idReserva;
+                Log.d("He", "id reservar en el crear:  " + rservas);
+                DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.getDefault());
+                LocalDate fechaFin1 = LocalDate.now();
+                String fechaFactura = fechaFin1.format(outputFormatter);
+                TextView totalRece = findViewById(R.id.txtTotal);
+                EncabezadoFactura encabezado = new EncabezadoFactura();
+                getDatos(correoUsuRe);
+                encabezado.setIdCliente(cedula);
+                encabezado.setFechaFactura(fechaFactura);
+                encabezado.setIdReserva(rservas);
+                encabezado.setTotal(Double.valueOf(totalRece.getText().toString()));
+                realizarSolicitudPOST("http://192.168.0.106:8081/api/encabezadofactura", encabezado);
+                //realizarSolicitudPOST("http://192.168.18.230:8081/api/encabezadofactura", encabezado);
+            }
+
+            @Override
+            public void onError(String errorMessage) {
+
+            }
+        });
+
+    }
+
+    public void crearDetalle() {
         buscarEcabezado(new Callback() {
             @Override
             public void onEncabezadoObtenido(long idEncabezado) {
-                Long restabel= idEncabezado;
-                DetalleFactura detalle= new DetalleFactura();
+                Long restabel = idEncabezado;
+                DetalleFactura detalle = new DetalleFactura();
                 detalle.setIdEncabezado(restabel);
                 detalle.setSubTotal(precio);
                 realizarSolicitudPOST("http://192.168.0.106:8081/api/detallefactura", detalle);
                 //realizarSolicitudPOST("http://192.168.18.230:8081/api/detallefactura", detalle);
             }
+
             @Override
             public void onError(String errorMessage) {
                 Log.d("He", "callback  " + errorMessage);
@@ -491,26 +494,26 @@ public void crearEncabezad(){
         });
     }
 
-    public void Principal(View view){
+    public void Principal(View view) {
         Intent princi = new Intent(this, PantallaPrincipal.class);
         startActivity(princi);
     }
 
-    public void getHabitacion(int id){
-        String url="http://192.168.0.106:8081/api/habitaciones/"+id;//endpoint.
+    public void getHabitacion(int id) {
+        String url = "http://192.168.0.106:8081/api/habitaciones/" + id;//endpoint.
         //String url="http://192.168.18.230:8081/api/habitaciones/"+id;//endpoint.
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url,null, new Response.Listener<JSONObject>() {
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 try {
-                    if(response.length()>0) {
+                    if (response.length() > 0) {
                         descripHabi = response.getString("descriphabi");
                         numHabi = response.getInt("nHabitacion");
                         numPiso = response.getInt("nPiso");
-                        Log.d("He","Descripcipn habi"+ descripHabi);
-                        Log.d("He", "Numero habi"+numHabi);
-                        Log.d("He", "Numero piso"+numPiso);
-                    }else{
+                        Log.d("He", "Descripcipn habi" + descripHabi);
+                        Log.d("He", "Numero habi" + numHabi);
+                        Log.d("He", "Numero piso" + numPiso);
+                    } else {
                         Toast.makeText(getApplicationContext(), "Habitacion no encontrada", Toast.LENGTH_LONG).show();
                     }
                 } catch (JSONException j) {
@@ -521,43 +524,43 @@ public void crearEncabezad(){
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.d("JSON ERROR",error.getMessage());
+                Log.d("JSON ERROR", error.getMessage());
             }
         });
         Volley.newRequestQueue(this).add(jsonObjectRequest);
     }
 
-    public void cambiarEstado(int id){
-        String url="http://192.168.0.106:8081/api/habitaciones/"+id;
+    public void cambiarEstado(int id) {
+        String url = "http://192.168.0.106:8081/api/habitaciones/" + id;
         //String url="http://192.168.18.230:8081/api/habitaciones/"+id;
-            JSONObject requestBodyHabitacion = new JSONObject();
-            try{
-                requestBodyHabitacion.put("estado","Ocupado");
-                requestBodyHabitacion.put("descriphabi",descripHabi);
-                requestBodyHabitacion.put("foto",decodedByte1.toString());
-                requestBodyHabitacion.put("nHabitacion",numHabi);
-                requestBodyHabitacion.put("nPiso",numPiso);
-                requestBodyHabitacion.put("precio",precio);
-            }catch(JSONException j){
-                j.printStackTrace();
-            }
-
-            JsonObjectRequest jsonObjectRequestUsuario = new JsonObjectRequest(Request.Method.PUT, url, requestBodyHabitacion, new Response.Listener<JSONObject>() {
-                @Override
-                public void onResponse(JSONObject response) {
-                    Toast.makeText(getApplicationContext(), "ACTUALIZACIÓN CORRECTA", Toast.LENGTH_LONG).show();
-
-                }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
-                }
-            });
-            Volley.newRequestQueue(this).add(jsonObjectRequestUsuario);
+        JSONObject requestBodyHabitacion = new JSONObject();
+        try {
+            requestBodyHabitacion.put("estado", "Ocupado");
+            requestBodyHabitacion.put("descriphabi", descripHabi);
+            requestBodyHabitacion.put("foto", decodedByte1.toString());
+            requestBodyHabitacion.put("nHabitacion", numHabi);
+            requestBodyHabitacion.put("nPiso", numPiso);
+            requestBodyHabitacion.put("precio", precio);
+        } catch (JSONException j) {
+            j.printStackTrace();
         }
 
-    private void asignarPago(){
+        JsonObjectRequest jsonObjectRequestUsuario = new JsonObjectRequest(Request.Method.PUT, url, requestBodyHabitacion, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                Toast.makeText(getApplicationContext(), "ACTUALIZACIÓN CORRECTA", Toast.LENGTH_LONG).show();
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+        Volley.newRequestQueue(this).add(jsonObjectRequestUsuario);
+    }
+
+    private void asignarPago() {
         final ImageView pagoTarjeta = findViewById(R.id.pgTarjeta);
         final ImageView pagoTransferencia = findViewById(R.id.pgtransfer);
         final ImageView pagoEfectivo = findViewById(R.id.pgEfectivo);
@@ -565,7 +568,7 @@ public void crearEncabezad(){
         pagoTarjeta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                idPago=1l;
+                idPago = 1l;
                 pagoTarjeta.setBackgroundResource(R.drawable.border_red);
                 pagoTransferencia.setBackground(null);
                 pagoEfectivo.setBackground(null);
@@ -574,7 +577,7 @@ public void crearEncabezad(){
         pagoTransferencia.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                idPago=2l;
+                idPago = 2l;
                 pagoTransferencia.setBackgroundResource(R.drawable.border_red);
                 pagoTarjeta.setBackground(null);
                 pagoEfectivo.setBackground(null);
@@ -583,7 +586,7 @@ public void crearEncabezad(){
         pagoEfectivo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                idPago=3l;
+                idPago = 3l;
                 pagoEfectivo.setBackgroundResource(R.drawable.border_red);
                 pagoTarjeta.setBackground(null);
                 pagoTransferencia.setBackground(null);

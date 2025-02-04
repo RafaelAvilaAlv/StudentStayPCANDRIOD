@@ -162,7 +162,7 @@ public class Registrar extends AppCompatActivity {
         persona.setTelefono(auxtelefono.getText().toString());
         persona.setEdad(calcularEdad());
 
-        realizarSolicitudPOST("http://192.168.0.106:8081/api/personas", persona);
+        realizarSolicitudPOST(Environment.BASE_URL + "/personas", persona);
         guardarClietnes();
     }
 
@@ -172,7 +172,7 @@ public class Registrar extends AppCompatActivity {
         clienteNuevo.setUsuario(emailText.getText().toString());
         clienteNuevo.setCedula_persona(auxcedula.getText().toString());
 
-        realizarSolicitudPOST("http://192.168.0.106:8081/api/clientes", clienteNuevo);
+        realizarSolicitudPOST(Environment.BASE_URL + "/clientes", clienteNuevo);
         //agregAR ventana login con mesaje y valida el usuario
     }
 
